@@ -8,6 +8,7 @@ typedef struct{
     double mass;
     double velocity;
     double X;
+    double width;
 } Block;
 
 double calculateMomentum(Block block);
@@ -29,6 +30,8 @@ int main(){
 
     Block smallBlock = {1, 0, 10};
     Block largeBlock = {1, -10, 50};
+    smallBlock.width = 1;
+    largeBlock.width = sqrt(largeBlock.mass);
     double wallPosition = 0;
 
 
@@ -82,12 +85,12 @@ void wallImpact(Block *block) {
 
 bool checkBlockCollision(Block *smallBlock, Block *largeBlock){
 
-    bool velocityOppositeDirection = (smallBlock->velocity >= 0 && largeBlock->velocity < 0);
-    bool velocityTowardsPositive = (smallBlock->velocity > 0 && largeBlock->velocity >= 0 && largeBlock->velocity < smallBlock->velocity);
-    bool velocityTowardsNegaive = (smallBlock->velocity <= 0 && largeBlock->velocity < 0 && largeBlock->velocity > smallBlock->velocity);
+    // bool velocityOppositeDirection = (smallBlock->velocity >= 0 && largeBlock->velocity < 0);
+    // bool velocityTowardsPositive = (smallBlock->velocity > 0 && largeBlock->velocity >= 0 && largeBlock->velocity < smallBlock->velocity);
+    // bool velocityTowardsNegaive = (smallBlock->velocity <= 0 && largeBlock->velocity < 0 && largeBlock->velocity > smallBlock->velocity);
 
-    bool collisionCondition = (smallBlock->X+smallBlock->velocity) >= (largeBlock->X+largeBlock->velocity);
-    bool collisionOnNextStep = velocityOppositeDirection && velocityTowardsPositive && velocityTowardsNegaive && collisionCondition;
+    bool collisionCondition = ((smallBlock->X+smallBlock->width)+smallBlock->velocity) >= (largeBlock->X+largeBlock->velocity);
+    // bool collisionOnNextStep = (velocityOppositeDirection || velocityTowardsPositive || velocityTowardsNegaive) && collisionCondition;
 
-    return collisionOnNextStep;
+    return collisionCondition;
 }

@@ -53,9 +53,9 @@ int main(){
         }
 
         // condition for block collision
-        bool isBlockCollision = true;
+        bool isBlockCollision = checkBlockCollision(&smallBlock, &largeBlock);
         if(isBlockCollision){
-            energyTransfer(&smallBlock, &largeBlock);
+            collision(&smallBlock, &largeBlock);
             collisions++;
         }
     }
@@ -93,4 +93,23 @@ bool checkBlockCollision(Block *smallBlock, Block *largeBlock){
     // bool collisionOnNextStep = (velocityOppositeDirection || velocityTowardsPositive || velocityTowardsNegaive) && collisionCondition;
 
     return collisionCondition;
+}
+
+bool checkWallCollision(Block *block){
+    // TODO
+    return true;
+}
+
+void collision(Block *smallBlock, Block *largeBlock){
+    // TODO
+    // here collision happens
+    // calculate pointOfCollision
+    double pointOfCollisio = pointOfCollision(&smallBlock, &largeBlock);
+    energyTransfer(&smallBlock, &largeBlock);
+
+}
+
+double pointOfCollision(Block *smallBlock, Block *largeBlock){
+    // TODO
+    return 1.0;
 }
